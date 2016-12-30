@@ -1,0 +1,47 @@
+package org.usfirst.frc.team4377.robot.commands;
+
+import org.usfirst.frc.team4377.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+
+
+public class DriveStraight extends Command {
+
+    
+	double m_Time = 0;
+	double m_Power = 0;
+   
+    public DriveStraight(double Time, double Power) {
+    	m_Time = Time;
+    	m_Power = Power;
+      	requires(Robot.driveTrain);
+       
+        setTimeout(m_Time);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    	
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	Robot.driveTrain.driveStraight(m_Power);
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return isTimedOut();
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	Robot.driveTrain.driveStraight(0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    	end();
+    }
+}
